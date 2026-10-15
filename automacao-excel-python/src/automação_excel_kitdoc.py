@@ -79,6 +79,7 @@ kits={
 
     "CB/C COMPL CBC":243,
     "CB/CP CPL CBC":243,
+    "CB/C CPL CBC":243,
 
 
     # - - - CARTÃO DE CRÉDITO - BEM CARTÕES - - -
@@ -94,6 +95,7 @@ kits={
 
     "CC/C COMPL CBC":255,
     "CC/CP CPL CBC":255,
+    "CC/C CPL CBC":255,
 
 
     # - - - EMPRESTIMO - BEM CARTÕES - - -
@@ -126,6 +128,7 @@ kits={
 
     "CB/C COMPL CCC":246,
     "CB/CP CPL CCC":246,
+    "CB/C CPL CCC":246,
 
 
     # - - - CARTÃO DE CRÉDITO - CAPITAL - - -
@@ -141,7 +144,7 @@ kits={
 
     "CC/C COMPL CCC":250,
     "CC/CP CPL CCC":250,
-
+    "CC/C CPL CCC":250,
 
     # - - - EMPRESTIMO - CAPITAL - - -
 
@@ -174,7 +177,7 @@ kits={
 
     "CB/C COMPL CCB":263,
     "CB/CP CPL CCB":263,
-
+    "CB/C CPL CCB":263,
 
     # - - - CARTÃO DE CRÉDITO - CLICKBANK - - -
 
@@ -189,6 +192,7 @@ kits={
 
     "CC/C COMPL CCB":264,
     "CC/CP CPL CCB":264,
+    "CC/C CPL CCB":264,
 
 
     # - - - EMPRESTIMO - CLICKBANK - - -
@@ -222,7 +226,7 @@ kits={
 
     "CB/C COMPL CHP":245,
     "CB/CP CPL CHP":245,
-
+    "CB/C CPL CHP":245,
 
     # - - - CARTÃO DE CRÉDITO - HOJE PREVIDENCIA - - -
 
@@ -237,6 +241,7 @@ kits={
 
     "CC/C COMPL CHP":258,
     "CC/CP CPL CHP":258,
+    "CC/C CPL CHP":258,
 
 
     # - - - EMPRESTIMO - HOJE PREVIDENCIA - - -
