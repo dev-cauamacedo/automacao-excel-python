@@ -13,6 +13,7 @@ O script lê uma planilha modelo, interpreta a descrição de cada linha (por ex
 * **80% mais rápido** na subida em lote do sistema
 * **Margem de erro reduzida em mais de 93%** já na primeira versão
 * **Praticamente zero erros** após a evolução do código: nas execuções seguintes, nenhuma linha foi marcada com `#ERRO#`
+* Após o uso em produção, surgiu uma combinação não prevista (compra complementar com `C` e `CPL` juntos). A coluna `#ERRO#` permitiu identificar o caso rapidamente, e a correção foi tratar `CP` como `C` e `COMPL` como `CPL` na chave do kit.
 * Processo que dependia da experiência de quem executava agora leva **cerca de 1 minuto** e já sai pronto
 
 ## ⚙️ Como Funciona
