@@ -1,12 +1,9 @@
-# importar a biblioteca pandas e dar o apelido "pd"
-# pandas é usado para ler e manipular planilhas Excel
+import re
 import pandas as pd
 
-# abrir planilha
-preencher=pd.read_excel("MODELO_LOTE - KITDOC V2.0.xlsx")
+preencher = pd.read_excel("modelos/MODELO_LOTE - KITDOC V2.0.xlsx")
 
-#DICIONÁRIOS 
-
+# - - - - - - - - - - DICIONÁRIOS - - - - - - - - - -
 rubricas={
     "CCC":5,
     "CCB":6,
@@ -24,11 +21,53 @@ produto={
 
 kits={
 
-    #ADIANTAMENTO SALARIAL
-    "ADTO":269,
-    "ADTO/CPL":270,
+    # - - - ADIANTAMENTO SALARIAL - - -
+    "ADTO CBC":269,
+    "ADIANTAMENTO CBC":269,
 
-    #CARTÃO BENEFICIO - BEM CARTOES
+    "ADTO CCC":269,
+    "ADIANTAMENTO CCC":269,
+
+    "ADTO CCB":269,
+    "ADIANTAMENTO CCB":269,
+
+    "ADTO CHP":269,
+    "ADIANTAMENTO CHP":269,
+    
+    "ADTO/CPL CBC":270,
+    "ADIANTAMENTO/CPL CBC":270,
+
+    "ADTO/CPL CCC":270,
+    "ADIANTAMENTO/CPL CCC":270,
+
+    "ADTO/CPL CCB":270,
+    "ADIANTAMENTO/CPL CCB":270,
+
+    "ADTO/CPL CHP":270,
+    "ADIANTAMENTO/CPL CHP":270,
+
+    "ADTO/C CBC":276,
+    "ADIANTAMENTO/C CBC":276,
+
+    "ADTO/C CCC":276,
+    "ADIANTAMENTO/C CCC":276,
+
+    "ADTO/C CCB":276,
+    "ADIANTAMENTO/C CCB":276,
+
+    "ADTO/C CHP":276,
+    "ADIANTAMENTO/C CHP":276,
+
+    # - - - BENS DURAVEIS - BEM CARTÕES- - -
+
+    "BD CBC":226,
+
+    "BD/CP CBC":256,
+    "BD/C CBC":256,
+
+
+    # - - - CARTÃO BENEFICIO - BEM CARTÕES - - -
+
     "CB CBC":228,
     "CB/SQ CBC":228,
 
@@ -41,7 +80,8 @@ kits={
     "CB/C COMPL CBC":243,
     "CB/CP CPL CBC":243,
 
-    #CARTÃO DE CRÉDITO - BEM CARTOES
+
+    # - - - CARTÃO DE CRÉDITO - BEM CARTÕES - - -
 
     "CC CBC":227,
     "CC/SQ CBC":227,
@@ -55,7 +95,8 @@ kits={
     "CC/C COMPL CBC":255,
     "CC/CP CPL CBC":255,
 
-    #EMPRESTIMO - BEM CARTOES
+
+    # - - - EMPRESTIMO - BEM CARTÕES - - -
 
     "EMP CBC":226,
     "EMP/CPL CBC":226,
@@ -65,7 +106,15 @@ kits={
     "EMP/CP CBC":256,
 
 
-    #CARTÃO BENEFICIO - CAPITAL
+    # - - - BENS DURAVEIS - CAPITAL - - -
+
+    "BD CCC":215,
+
+    "BD/CP CCC":251,
+    "BD/C CCC":251,
+
+
+    # - - - CARTÃO BENEFICIO - CAPITAL - - -
     "CB CCC":213,
     "CB/SQ CCC":213,
 
@@ -78,7 +127,8 @@ kits={
     "CB/C COMPL CCC":246,
     "CB/CP CPL CCC":246,
 
-    #CARTÃO DE CRÉDITO - CAPITAL
+
+    # - - - CARTÃO DE CRÉDITO - CAPITAL - - -
 
     "CC CCC":214,
     "CC/SQ CCC":214,
@@ -92,7 +142,8 @@ kits={
     "CC/C COMPL CCC":250,
     "CC/CP CPL CCC":250,
 
-    #EMPRESTIMO - CAPITAL
+
+    # - - - EMPRESTIMO - CAPITAL - - -
 
     "EMP CCC":215,
     "EMP/CPL CCC":215,
@@ -101,7 +152,17 @@ kits={
     "EMP/C CCC":251,
     "EMP/CP CCC":251,
 
-    #CARTÃO BENEFICIO - CLICKBANK
+
+    # - - - BENS DURAVEIS - CLICKBANK - - -
+
+    "BD CCB":235,
+
+    "BD/CP CCB":262,
+    "BD/C CCB":262,
+
+
+    # - - - CARTÃO BENEFICIO - CLICKBANK - - -
+
     "CB CCB":212,
     "CB/SQ CCB":212,
 
@@ -114,7 +175,8 @@ kits={
     "CB/C COMPL CCB":263,
     "CB/CP CPL CCB":263,
 
-    #CARTÃO DE CRÉDITO - CLICKBANK
+
+    # - - - CARTÃO DE CRÉDITO - CLICKBANK - - -
 
     "CC CCB":219,
     "CC/SQ CCB":219,
@@ -128,7 +190,8 @@ kits={
     "CC/C COMPL CCB":264,
     "CC/CP CPL CCB":264,
 
-    #EMPRESTIMO - CLICKBANK
+
+    # - - - EMPRESTIMO - CLICKBANK - - -
 
     "EMP CCB":235,
     "EMP/CPL CCB":235,
@@ -137,8 +200,17 @@ kits={
     "EMP/C CCB":262,
     "EMP/CP CCB":262,
 
-    
-    #CARTÃO BENEFICIO - HOJE PREVIDENCIA
+
+    # - - - BENS DURAVEIS - HOJE PREVIDENCIA - - -
+
+    "BD CHP":232,
+
+    "BD/CP CHP":259,
+    "BD/C CHP":259,
+
+
+    # - - - CARTÃO BENEFICIO - HOJE PREVIDENCIA - - -
+
     "CB CHP":223,
     "CB/SQ CHP":223,
 
@@ -151,7 +223,8 @@ kits={
     "CB/C COMPL CHP":245,
     "CB/CP CPL CHP":245,
 
-    #CARTÃO DE CRÉDITO - HOJE PREVIDENCIA
+
+    # - - - CARTÃO DE CRÉDITO - HOJE PREVIDENCIA - - -
 
     "CC CHP":221,
     "CC/SQ CHP":221,
@@ -165,7 +238,8 @@ kits={
     "CC/C COMPL CHP":258,
     "CC/CP CPL CHP":258,
 
-    #EMPRESTIMO - HOJE PREVIDENCIA
+
+    # - - - EMPRESTIMO - HOJE PREVIDENCIA - - -
 
     "EMP CHP":232,
     "EMP/CPL CHP":232,
@@ -175,59 +249,61 @@ kits={
     "EMP/CP CHP":259,
 }
 
-#prepara colunas para aceitar texto ou número
-preencher["rubrica"]=preencher["rubrica"].astype(object)
-preencher["produto"]=preencher["produto"].astype(object)
-preencher["kit"]=preencher["kit"].astype(object)
+# - - - - - - - - - - PREPARAÇÃO - - - - - - - - - -
+siglas_modificadoras={"C", "CP", "CPL", "COMPL"}#lista das partes do meio do nome que mudam o kit
 
-#LOOP PRINCIPAL
-for i,linha in preencher.iterrows():
+def quebrar(texto):
+    partes = re.split(r"[\s/_]+", str(texto).strip())
 
-    nome=linha["descricao"]
+    partes_limpas = []
+    for parte in partes:
+        if parte:  #ignora pedaços vazios                   
+            partes_limpas.append(parte)
+    return partes_limpas
 
+
+def chave_kit(texto):  #só o que precisa para identificar o kit
+    t = quebrar(texto)
+    produto_ = t[0]
+    rubrica_ = t[-1]
+
+    siglas_encontradas=[]
+    for modificador in t[1:-1]: #percorre só o meio do nome
+        if modificador in siglas_modificadoras:
+            siglas_encontradas.append(modificador)
+    modificadores=frozenset(siglas_encontradas)
+    return (produto_, modificadores, rubrica_)
+
+
+#converte o dicionário "kits" para o formato preparado
+kit_por_linha = {}
+for chave, codigo in kits.items(): #chave = texto do kit, codigo=código do kit
+    kit_por_linha[chave_kit(chave)] = codigo
+
+# - - - - - - - - - - PREPARANDO PARA PREENCHER - - - - - - - - - -
+for coluna in ["rubrica", "produto", "kit"]:
+    preencher[coluna] = preencher[coluna].astype(object)
+
+# - - - - - - - - - - PREENCHENDO COLUNAS FIXAS - - - - - - - - - -
+preencher["identidade"] = 14
+preencher["setor"] = 2
+preencher["status"] = 1
+
+# - - - - - - - - - - LOOP PRINCIPAL - - - - - - - - - -
+for i, linha in preencher.iterrows():
+    nome = linha["descricao"]
     if pd.isna(nome):
         continue
 
-    palavras=str(nome).split()
+    partes = quebrar(nome) #quebra o nome em partes
 
-    #RUBRICA
-    sigla_rubrica=palavras[-1]
+    # RUBRICA
+    preencher.loc[i, "rubrica"] = rubricas.get(partes[-1], "#ERRO#")
 
-    rubrica_encontrada=rubricas.get(sigla_rubrica)
+    # PRODUTO
+    preencher.loc[i, "produto"] = produto.get(partes[0], "#ERRO#")
 
-    if rubrica_encontrada:
-        preencher.loc[i,"rubrica"]=rubrica_encontrada
-    else:
-        preencher.loc[i,"rubrica"]="#ERRO#"
+    # KIT
+    preencher.loc[i, "kit"] = kit_por_linha.get(chave_kit(nome), "#ERRO#")
 
-
-    #PRODUTO
-    sigla_produto=str(linha["descricao"]).split()[0].split("/")[0]
-
-    produto_encontrado=produto.get(sigla_produto)
-
-    if produto_encontrado:
-        preencher.loc[i,"produto"]=produto_encontrado
-    else:
-        preencher.loc[i,"produto"]="#ERRO#"
-
-    #IDENTIDADE
-    preencher["identidade"]=14
-
-    #SETOR
-    preencher["setor"]=2
-
-    #STATUS
-    preencher["status"]=1
-
-    #KIT
-    sigla_kit=f"{palavras[0]} {palavras[-1]}" 
-    
-    kit_encontrada=kits.get(sigla_kit) 
-    
-    if kit_encontrada: preencher.loc[i,"kit"]=kit_encontrada 
-    
-    else: preencher.loc[i,"kit"]="#ERRO#"
-
-# salvar planilha
-preencher.to_excel("MODELO_LOTE - PREENCHIDO.xlsx", index=False)
+preencher.to_excel("modelos/MODELO_LOTE - PREENCHIDO.xlsx", index=False)
